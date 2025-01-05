@@ -1,0 +1,158 @@
+*,
+::after,
+::before {
+  /* box-sizing: border-box; */
+  font: 0.95em Menlo, monospaced;
+}
+
+.timeline-container {
+  display: flex;
+  justify-content: center; /* Horizontally center */
+  align-items: center; /* Vertically center */
+  height: 100vh; /* Full viewport height */
+}
+
+.timeline {
+  --timeline-color: #9bc;
+  position: relative;
+  list-style: none;
+  display: inline-flex;
+  flex-wrap: nowrap;
+  margin: 15% auto; /* Vertical margin and horizontal centering */
+  padding: 0;
+
+  /* set here the height of the timeline */
+  height: 240px;
+}
+
+/* middle line */
+.timeline:before {
+  content: "";
+  position: absolute;
+  top: calc(50% - 1px);
+  width: 100%;
+  height: 2px;
+  background: var(--timeline-color);
+}
+
+.timeline:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -10px; /* Aligns the triangle to the right edge */
+  transform: translateY(-50%);
+  border: 10px solid transparent; /* Creates a triangular shape */
+  border-left-color: var(--timeline-color); /* Color for the triangle */
+  border-right: none; /* Removes the right border for a perfect triangle */
+  height: 0;
+  width: 0;
+}
+
+.timeline li {
+  border: 1px var(--timeline-color) solid;
+  color: var(--timeline-color);
+  background: #fff;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-self: flex-start;
+}
+
+.timeline li:not(:last-child) {
+  margin: 0 -50px 0 0;
+}
+
+/*  event in even position are bottom-aligned */
+.timeline li:nth-child(2n),
+.timeline li:nth-child(2n) div {
+  align-self: flex-end;
+}
+
+.timeline div {
+  position: relative;
+  width: 200px;
+  padding: 10px;
+}
+
+/* position of the event arrow in odd position */
+.timeline li:nth-child(2n - 1) div:before {
+  content: "";
+  background-color: #9bc;
+  width: 42px;
+  height: 2px;
+  position: absolute;
+  top: 89px;
+  left: 79px;
+  z-index: 1;
+  transform: rotate(90deg); /* Rotates the line by 90 degrees */
+  -moz-transform: rotate(90deg); /* Mozilla-specific */
+}
+
+/* position of the event arrow in even position */
+.timeline li:nth-child(2n) div:before {
+  content: "";
+  background-color: #9bc;
+  width: 46px;
+  height: 2px;
+  position: absolute;
+  top: -25px;
+  left: 77px;
+  z-index: 1;
+  transform: rotate(90deg); /* Rotates the line by -90 degrees */
+  -moz-transform: rotate(90deg); /* Mozilla-specific */
+}
+
+/* style for the dot over the timeline */
+.timeline li:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  margin-left: 100px;
+  transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%); /* Mozilla-specific */
+  border: 1px #9bc solid;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  -moz-border-radius: 50%; /* Mozilla-specific */
+  background: var(--timeline-color);
+  cursor: pointer;
+  box-shadow: 0 0 0 1px #fff, 0 0 0 3px var(--timeline-color);
+  -moz-box-shadow: 0 0 0 1px #fff, 0 0 0 3px var(--timeline-color); /* Mozilla-specific */
+  z-index: 2; /* Ensure this is higher than the z-index of the li itself */
+}
+
+/* style for the event arrow */
+.timeline div:before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  -moz-left: 50%; /* Mozilla-specific */
+  -moz-top: 100%; /* Mozilla-specific */
+}
+
+.timeline .detail {
+  display: none;
+}
+
+.timeline li:hover {
+  cursor: pointer;
+  height: auto;
+  z-index: 2;
+  background: #fff;
+}
+
+.timeline li:hover .detail {
+  display: block;
+}
+
+.timeline li:hover {
+  color: #fff;
+  background: var(--timeline-color);
+}
+
+.timeline li:hover::before,
+.timeline li:hover div::before {
+  display: none;
+}

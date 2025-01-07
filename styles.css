@@ -271,7 +271,7 @@
   display: none;
 }
 
-/* .timeline li:hover {
+.timeline li:hover {
   cursor: pointer;
   height: auto;
   z-index: 2;
@@ -290,4 +290,4 @@
 .timeline li:hover::before,
 .timeline li:hover div::before {
   display: none;
-} */
+}
